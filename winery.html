@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Winery & Beverages | Bertrand Cafe - Premium South African Spirits</title>
+    <meta name="description"
+        content="Explore our curated collection of wines, spirits, and craft beverages. From the Bertrand Wine Collection to premium South African whiskeys and MCCs.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="winery-styles.css">
+</head>
+
+<body class="winery-page">
+    <!-- Full-Site Video Background -->
+    <div class="video-background">
+        <video autoplay muted loop playsinline id="bgVideo">
+            <source src="background_video/4K Space Star scene - Free M.G Stock Footage (1080p).mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar scrolled">
+        <div class="nav-container">
+            <!-- Left: Back to Home -->
+            <div class="nav-left">
+                <a href="index.html" class="nav-back">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7" />
+                    </svg>
+                    <span>Back</span>
+                </a>
+            </div>
+
+            <!-- Center: Logo -->
+            <a href="index.html" class="logo">
+                <span class="logo-text">Bertrand</span>
+                <span class="logo-accent">Cafe</span>
+            </a>
+
+            <!-- Right: Icons -->
+            <div class="nav-right">
+                <button class="nav-icon" aria-label="Search" id="winerySearchToggle">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="M21 21l-4.35-4.35" />
+                    </svg>
+                </button>
+                <button class="nav-icon nav-cart" aria-label="Basket" id="wineryCartToggle">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8">
+                        <path d="M4 10c0 0 0-3 8-3s8 3 8 3" />
+                        <path d="M3 10h18v2c0 5-3 9-9 9s-9-4-9-9v-2z" />
+                        <path d="M12 7V4" />
+                        <path d="M10 5c0-1.5 1-2 2-2s2 .5 2 2" />
+                        <circle cx="8" cy="14" r="1.5" fill="currentColor" />
+                        <circle cx="12" cy="16" r="1.5" fill="currentColor" />
+                        <circle cx="16" cy="14" r="1.5" fill="currentColor" />
+                    </svg>
+                    <span class="cart-count" id="wineryCartCount">0</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Winery Hero Section -->
+    <header class="winery-hero">
+        <div class="winery-hero-bg" style="background-image: url('images/winery-bg.jpg')"></div>
+        <div class="winery-hero-overlay"></div>
+        <div class="winery-hero-content">
+            <span class="winery-hero-tag">The Cellar</span>
+            <h1 class="winery-hero-title">
+                Winery &
+                <span class="highlight">Spirits</span>
+            </h1>
+            <p class="winery-hero-subtitle">A curated collection of South African wines, craft beverages, and premium
+                spirits.</p>
+        </div>
+
+        <!-- Decorative Elements -->
+        <div class="winery-hero-decor">
+            <span class="diamond">◆</span>
+            <span class="diamond">◆</span>
+            <span class="diamond">◆</span>
+        </div>
+    </header>
+
+    <!-- Category Navigation (Sticky) -->
+    <nav class="winery-categories" id="wineryCategories">
+        <div class="categories-container">
+            <button class="category-btn active" data-category="all">All</button>
+            <button class="category-btn" data-category="wines">Wines</button>
+            <button class="category-btn" data-category="ciders">Ciders</button>
+            <button class="category-btn" data-category="beers">Beers</button>
+            <button class="category-btn" data-category="spirits">Spirits</button>
+            <button class="category-btn" data-category="champagne">Champagne</button>
+            <button class="category-btn" data-category="cocktails">Cocktails</button>
+        </div>
+    </nav>
+
+    <!-- Sorting Controls -->
+    <div class="winery-controls">
+        <div class="winery-controls-container">
+            <div class="control-group">
+                <label for="sortSelect">Sort by:</label>
+                <select id="sortSelect" class="sort-select">
+                    <option value="featured">Featured</option>
+                    <option value="price-asc">Price: Low to High</option>
+                    <option value="price-desc">Price: High to Low</option>
+                    <option value="name-asc">Name: A-Z</option>
+                    <option value="name-desc">Name: Z-A</option>
+                </select>
+            </div>
+            <span class="results-count" id="resultsCount">Showing all products</span>
+        </div>
+    </div>
+
+    <!-- Winery Content -->
+    <main class="winery-content">
+        <div class="winery-container">
+
+            <!-- Section: Bertrand Wine Collection -->
+            <section class="winery-section" id="wines-section">
+                <div class="section-header">
+                    <span class="section-tag">House Selection</span>
+                    <h2 class="section-title">The Bertrand <span class="highlight">Collection</span></h2>
+                </div>
+
+                <div class="winery-grid" id="wineryGrid">
+
+                    <!-- Bertrand Sauvignon Blanc -->
+                    <article class="product-card" data-category="wines" data-price="185"
+                        data-name="Bertrand Sauvignon Blanc">
+                        <div class="product-card-image">
+                            <div class="image-placeholder">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                    <path d="M12 2v6M8 8h8M8 8c0 4-2 6-2 10a4 4 0 108 0c0-4-2-6-2-10H8z" />
+                                </svg>
+                                <span>Wine Image</span>
+                            </div>
+                            <span class="product-badge badge-house">HOUSE WINE</span>
+                        </div>
+                        <div class="product-card-body">
+                            <span class="product-category">WHITE WINE</span>
+                            <h3 class="product-title">Bertrand Sauvignon Blanc</h3>
+                            <p class="product-desc">Crisp and refreshing with notes of tropical fruit, citrus, and a
+                                hint of green pepper. Perfect with seafood.</p>
+                            <div class="product-footer">
+                                <span class="product-price">R185</span>
+                                <button class="btn-add-cart" data-item="Bertrand Sauvignon Blanc" data-price="185">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <line x1="12" y1="5" x2="12" y2="19" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                    </svg>
+                                    <span>Add</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Bertrand Cabernet Sauvignon -->
+                    <article class="product-card" data-category="wines" data-price="220"
+                        data-name="Bertrand Cabernet Sauvignon">
+                        <div class="product-card-image">
+                            <div class="image-placeholder">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                    <path d="M12 2v6M8 8h8M8 8c0 4-2 6-2 10a4 4 0 108 0c0-4-2-6-2-10H8z" />
+                                </svg>
+                                <span>Wine Image</span>
+                            </div>
+                            <span class="product-badge badge-signature">SIGNATURE</span>
+                        </div>
+                        <div class="product-card-body">
+                            <span class="product-category">RED WINE</span>
+                            <h3 class="product-title">Bertrand Cabernet Sauvignon</h3>
+                            <p class="product-desc">Full-bodied with blackcurrant, cedar, and subtle oak. A bold
+                                companion to red meats and aged cheeses.</p>
+                            <div class="product-footer">
+                                <span class="product-price">R220</span>
+                                <button class="btn-add-cart" data-item="Bertrand Cabernet Sauvignon" data-price="220">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <line x1="12" y1="5" x2="12" y2="19" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                    </svg>
+                                    <span>Add</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Bertrand Chardonnay -->
+                    <article class="product-card" data-category="wines" data-price="195"
+                        data-name="Bertrand Chardonnay">
+                        <div class="product-card-image">
+                            <div class="image-placeholder">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                    <path d="M12 2v6M8 8h8M8 8c0 4-2 6-2 10a4 4 0 108 0c0-4-2-6-2-10H8z" />
+                                </svg>
+                                <span>Wine Image</span>
+                            </div>
+                            <span class="product-badge badge-classic">CAFÉ CLASSIC</span>
+                        </div>
+                        <div class="product-card-body">
+                            <span class="product-category">WHITE WINE</span>
+                            <h3 class="product-title">Bertrand Chardonnay</h3>
+                            <p class="product-desc">Rich and buttery with notes of vanilla, ripe pear, and toasted oak.
+                                Pairs beautifully with poultry.</p>
+                            <div class="product-footer">
+                                <span class="product-price">R195</span>
+                                <button class="btn-add-cart" data-item="Bertrand Chardonnay" data-price="195">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <line x1="12" y1="5" x2="12" y2="19" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                    </svg>
+                                    <span>Add</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Bertrand Shiraz -->
+                    <article class="product-card" data-category="wines" data-price="210" data-name="Bertrand Shiraz">
+                        <div class="product-card-image">
+                            <div class="image-placeholder">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                    <path d="M12 2v6M8 8h8M8 8c0 4-2 6-2 10a4 4 0 108 0c0-4-2-6-2-10H8z" />
+                                </svg>
+                                <span>Wine Image</span>
+                            </div>
+                            <span class="product-badge badge-house">HOUSE WINE</span>
+                        </div>
+                        <div class="product-card-body">
+                            <span class="product-category">RED WINE</span>
+                            <h3 class="product-title">Bertrand Shiraz</h3>
+                            <p class="product-desc">Spicy and robust with dark berry, pepper, and smoky undertones.
+                                Ideal with game and barbecued meats.</p>
+                            <div class="product-footer">
+                                <span class="product-price">R210</span>
+                                <button class="btn-add-cart" data-item="Bertrand Shiraz" data-price="210">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <line x1="12" y1="5" x2="12" y2="19" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                    </svg>
+                                    <span>Add</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Bertrand Pinotage -->
+                    <article class="product-card" data-category="wines" data-price="230" data-name="Bertrand Pinotage">
+                        <div class="product-card-image">
+                            <div class="image-placeholder">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                    <path d="M12 2v6M8 8h8M8 8c0 4-2 6-2 10a4 4 0 108 0c0-4-2-6-2-10H8z" />
+                                </svg>
+                                <span>Wine Image</span>
+                            </div>
+                            <span class="product-badge badge-signature">SIGNATURE</span>
+                        </div>
+                        <div class="product-card-body">
+                            <span class="product-category">RED WINE</span>
+                            <h3 class="product-title">Bertrand Pinotage</h3>
+                            <p class="product-desc">South Africa's signature grape. Earthy, with plum, coffee, and
+                                chocolate notes. A true local treasure.</p>
+                            <div class="product-footer">
+                                <span class="product-price">R230</span>
+                                <button class="btn-add-cart" data-item="Bertrand Pinotage" data-price="230">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <line x1="12" y1="5" x2="12" y2="19" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                    </svg>
+                                    <span>Add</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ============================================
+                         CIDERS
+                         ============================================ -->
+
+                    <!-- Savanna Dry Premium Cider -->
+                    <article class="product-card" data-category="ciders" data-price="55"
+                        data-name="Savanna Dry Premium Cider">
+                        <div class="product-card-image">
+                            <div class="image-placeholder placeholder-cider">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                    <rect x="8" y="2" width="8" height="3" rx="1" />
+                                    <path d="M9 5h6v14a3 3 0 01-3 3v0a3 3 0 01-3-3V5z" />
+                                </svg>
+                                <span>Cider Image</span>
+                            </div>
+                            <span class="product-badge badge-popular">POPULAR</span>
+                        </div>
+                        <div class="product-card-body">
+                            <span class="product-category">CIDER</span>
+                            <h3 class="product-title">Savanna Dry Premium Cider</h3>
+                            <p class="product-desc">Crisp, dry, and refreshing. South Africa's favourite premium cider
+                                with a clean, tangy finish.</p>
+                            <div class="product-footer">
+                                <span class="product-price">R55</span>
+                                <button class="btn-add-cart" data-item="Savanna Dry Premium Cider" data-price="55">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <line x1="12" y1="5" x2="12" y2="19" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                    </svg>
+                                    <span>Add</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Hunter's Edge Cider -->
+                    <article class="product-card" data-category="ciders" data-price="50"
+                        data-name="Hunter's Edge Cider">
+                        <div class="product-card-image">
+                            <div class="image-placeholder placeholder-cider">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                    <rect x="8" y="2" width="8" height="3" rx="1" />
+                                    <path d="M9 5h6v14a3 3 0 01-3 3v0a3 3 0 01-3-3V5z" />
+                                </svg>
+                                <span>Cider Image</span>
+                            </div>
+                        </div>
+                        <div class="product-card-body">
+                            <span class="product-category">CIDER</span>
+                            <h3 class="product-title">Hunter's Edge Cider</h3>
+                            <p class="product-desc">A bold, slightly sweet apple cider with a refreshing edge. Perfect
+                                for hot summer days.</p>
+                            <div class="product-footer">
+                                <span class="product-price">R50</span>
+                                <button class="btn-add-cart" data-item="Hunter's Edge Cider" data-price="50">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <line x1="12" y1="5" x2="12" y2="19" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                    </svg>
+                                    <span>Add</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ============================================
+                         BEERS
+                         ============================================ -->
+
+                    <!-- Castle Lager -->
+                    <article class="product-card" data-category="beers" data-price="40" data-name="Castle Lager">
+                        <div class="product-card-image">
+                            <div class="image-placeholder placeholder-beer">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                    <path d="M8 2h8l1 4v12a2 2 0 01-2 2h-6a2 2 0 01-2-2V6l1-4z" />
+                                    <path d="M17 8h2a2 2 0 012 2v3a2 2 0 01-2 2h-2" />
+                                </svg>
+                                <span>Beer Image</span>
+                            </div>
+                            <span class="product-badge badge-classic">CLASSIC</span>
+                        </div>
+                        <div class="product-card-body">
+                            <span class="product-category">BEER</span>
+                            <h3 class="product-title">Castle Lager</h3>
+                            <p class="product-desc">South Africa's iconic lager. Smooth, refreshing, and perfectly
+                                balanced since 1895.</p>
+                            <div class="product-footer">
+                                <span class="product-price">R40</span>
+                                <button class="btn-add-cart" data-item="Castle Lager" data-price="40">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <line x1="12" y1="5" x2="12" y2="19" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                    </svg>
+                                    <span>Add</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Devil's Peak Craft Lager -->
+                    <article class="product-card" data-category="beers" data-price="65"
+                        data-name="Devil's Peak Craft Lager">
+                        <div class="product-card-image">
+                            <div class="image-placeholder placeholder-beer">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                    <path d="M8 2h8l1 4v12a2 2 0 01-2 2h-6a2 2 0 01-2-2V6l1-4z" />
+                                    <path d="M17 8h2a2 2 0 012 2v3a2 2 0 01-2 2h-2" />
+                                </svg>
+                                <span>Beer Image</span>
+                            </div>
+                            <span class="product-badge badge-craft">CRAFT</span>
+                        </div>
+                        <div class="product-card-body">
+                            <span class="product-category">CRAFT BEER</span>
+                            <h3 class="product-title">Devil's Peak Craft Lager</h3>
+                            <p class="product-desc">Cape Town's finest craft lager. Crisp, clean, and brewed with
+                                passion.</p>
+                            <div class="product-footer">
+                                <span class="product-price">R65</span>
+                                <button class="btn-add-cart" data-item="Devil's Peak Craft Lager" data-price="65">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <line x1="12" y1="5" x2="12" y2="19" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                    </svg>
+                                    <span>Add</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ============================================
+                         SPIRITS
+                         ============================================ -->
+
+                    <!-- Bain's Cape Mountain Whisky -->
+                    <article class="product-card" data-category="spirits" data-price="95"
+                        data-name="Bain's Cape Mountain Whisky">
+                        <div class="product-card-image">
+                            <div class="image-placeholder placeholder-spirit">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                    <path d="M10 2h4l1 3v15a2 2 0 01-2 2h-2a2 2 0 01-2-2V5l1-3z" />
+                                    <rect x="9" y="2" width="6" height="2" />
+                                </svg>
+                                <span>Whisky Image</span>
+                            </div>
+                            <span class="product-badge badge-premium">PREMIUM</span>
+                        </div>
+                        <div class="product-card-body">
+                            <span class="product-category">WHISKY</span>
+                            <h3 class="product-title">Bain's Cape Mountain Whisky</h3>
+                            <p class="product-desc">World's best grain whisky. Smooth with toffee, vanilla, and spice.
+                                Single grain excellence.</p>
+                            <div class="product-footer">
+                                <span class="product-price">R95</span>
+                                <button class="btn-add-cart" data-item="Bain's Cape Mountain Whisky" data-price="95">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <line x1="12" y1="5" x2="12" y2="19" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                    </svg>
+                                    <span>Add</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- KWV 10 Year Brandy -->
+                    <article class="product-card" data-category="spirits" data-price="85"
+                        data-name="KWV 10 Year Brandy">
+                        <div class="product-card-image">
+                            <div class="image-placeholder placeholder-spirit">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                    <path d="M10 2h4l1 3v15a2 2 0 01-2 2h-2a2 2 0 01-2-2V5l1-3z" />
+                                    <rect x="9" y="2" width="6" height="2" />
+                                </svg>
+                                <span>Brandy Image</span>
+                            </div>
+                            <span class="product-badge badge-aged">10 YEAR</span>
+                        </div>
+                        <div class="product-card-body">
+                            <span class="product-category">BRANDY</span>
+                            <h3 class="product-title">KWV 10 Year Brandy</h3>
+                            <p class="product-desc">Aged to perfection. Rich oak, dried fruit, and warm spice. South
+                                Africa's finest brandy.</p>
+                            <div class="product-footer">
+                                <span class="product-price">R85</span>
+                                <button class="btn-add-cart" data-item="KWV 10 Year Brandy" data-price="85">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <line x1="12" y1="5" x2="12" y2="19" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                    </svg>
+                                    <span>Add</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Inverroche Gin -->
+                    <article class="product-card" data-category="spirits" data-price="80" data-name="Inverroche Gin">
+                        <div class="product-card-image">
+                            <div class="image-placeholder placeholder-spirit">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                    <path d="M10 2h4l1 3v15a2 2 0 01-2 2h-2a2 2 0 01-2-2V5l1-3z" />
+                                    <rect x="9" y="2" width="6" height="2" />
+                                </svg>
+                                <span>Gin Image</span>
+                            </div>
+                            <span class="product-badge badge-craft">CRAFT</span>
+                        </div>
+                        <div class="product-card-body">
+                            <span class="product-category">GIN</span>
+                            <h3 class="product-title">Inverroche Gin</h3>
+                            <p class="product-desc">Fynbos-infused craft gin. Floral, herbaceous, and distinctly South
+                                African botanicals.</p>
+                            <div class="product-footer">
+                                <span class="product-price">R80</span>
+                                <button class="btn-add-cart" data-item="Inverroche Gin" data-price="80">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <line x1="12" y1="5" x2="12" y2="19" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                    </svg>
+                                    <span>Add</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Mzansi Vodka -->
+                    <article class="product-card" data-category="spirits" data-price="70" data-name="Mzansi Vodka">
+                        <div class="product-card-image">
+                            <div class="image-placeholder placeholder-spirit">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                    <path d="M10 2h4l1 3v15a2 2 0 01-2 2h-2a2 2 0 01-2-2V5l1-3z" />
+                                    <rect x="9" y="2" width="6" height="2" />
+                                </svg>
+                                <span>Vodka Image</span>
+                            </div>
+                        </div>
+                        <div class="product-card-body">
+                            <span class="product-category">VODKA</span>
+                            <h3 class="product-title">Mzansi Vodka</h3>
+                            <p class="product-desc">Pure, clean, and exceptionally smooth. Triple-distilled for the
+                                perfect cocktail base.</p>
+                            <div class="product-footer">
+                                <span class="product-price">R70</span>
+                                <button class="btn-add-cart" data-item="Mzansi Vodka" data-price="70">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <line x1="12" y1="5" x2="12" y2="19" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                    </svg>
+                                    <span>Add</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ============================================
+                         CHAMPAGNE / MCC
+                         ============================================ -->
+
+                    <!-- Graham Beck Brut MCC -->
+                    <article class="product-card" data-category="champagne" data-price="320"
+                        data-name="Graham Beck Brut MCC">
+                        <div class="product-card-image">
+                            <div class="image-placeholder placeholder-champagne">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                    <path d="M12 2v4M9 6h6M9 6l-1 12a4 4 0 004 4v0a4 4 0 004-4L15 6H9z" />
+                                    <circle cx="12" cy="4" r="2" />
+                                </svg>
+                                <span>MCC Image</span>
+                            </div>
+                            <span class="product-badge badge-premium">PREMIUM MCC</span>
+                        </div>
+                        <div class="product-card-body">
+                            <span class="product-category">MCC SPARKLING</span>
+                            <h3 class="product-title">Graham Beck Brut MCC</h3>
+                            <p class="product-desc">Elegant and refined. Fine bubbles, citrus notes, and a creamy
+                                finish. World-class méthode cap classique.</p>
+                            <div class="product-footer">
+                                <span class="product-price">R320</span>
+                                <button class="btn-add-cart" data-item="Graham Beck Brut MCC" data-price="320">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <line x1="12" y1="5" x2="12" y2="19" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                    </svg>
+                                    <span>Add</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Boschendal Brut Rosé -->
+                    <article class="product-card" data-category="champagne" data-price="290"
+                        data-name="Boschendal Brut Rosé">
+                        <div class="product-card-image">
+                            <div class="image-placeholder placeholder-champagne">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                    <path d="M12 2v4M9 6h6M9 6l-1 12a4 4 0 004 4v0a4 4 0 004-4L15 6H9z" />
+                                    <circle cx="12" cy="4" r="2" />
+                                </svg>
+                                <span>MCC Image</span>
+                            </div>
+                            <span class="product-badge badge-rose">ROSÉ</span>
+                        </div>
+                        <div class="product-card-body">
+                            <span class="product-category">MCC SPARKLING</span>
+                            <h3 class="product-title">Boschendal Brut Rosé</h3>
+                            <p class="product-desc">Delicate salmon-pink with strawberry and floral notes. Celebrate in
+                                style with this Cape classic.</p>
+                            <div class="product-footer">
+                                <span class="product-price">R290</span>
+                                <button class="btn-add-cart" data-item="Boschendal Brut Rosé" data-price="290">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <line x1="12" y1="5" x2="12" y2="19" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                    </svg>
+                                    <span>Add</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ============================================
+                         COCKTAILS
+                         ============================================ -->
+
+                    <!-- Amarula Sunset -->
+                    <article class="product-card" data-category="cocktails" data-price="95" data-name="Amarula Sunset">
+                        <div class="product-card-image">
+                            <div class="image-placeholder placeholder-cocktail">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                    <path d="M8 22h8M12 22V12M6 2l6 10 6-10" />
+                                </svg>
+                                <span>Cocktail Image</span>
+                            </div>
+                            <span class="product-badge badge-house">HOUSE SPECIAL</span>
+                        </div>
+                        <div class="product-card-body">
+                            <span class="product-category">COCKTAIL</span>
+                            <h3 class="product-title">Amarula Sunset</h3>
+                            <p class="product-desc">Creamy Amarula, espresso, and a hint of vanilla. A decadent African
+                                dessert in a glass.</p>
+                            <div class="product-footer">
+                                <span class="product-price">R95</span>
+                                <button class="btn-add-cart" data-item="Amarula Sunset" data-price="95">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <line x1="12" y1="5" x2="12" y2="19" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                    </svg>
+                                    <span>Add</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Cape Fynbos G&T -->
+                    <article class="product-card" data-category="cocktails" data-price="85" data-name="Cape Fynbos G&T">
+                        <div class="product-card-image">
+                            <div class="image-placeholder placeholder-cocktail">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                    <path d="M8 22h8M12 22V12M6 2l6 10 6-10" />
+                                </svg>
+                                <span>Cocktail Image</span>
+                            </div>
+                            <span class="product-badge badge-popular">POPULAR</span>
+                        </div>
+                        <div class="product-card-body">
+                            <span class="product-category">COCKTAIL</span>
+                            <h3 class="product-title">Cape Fynbos G&T</h3>
+                            <p class="product-desc">Inverroche gin, premium tonic, fresh lime, and indigenous
+                                botanicals. Taste the Cape.</p>
+                            <div class="product-footer">
+                                <span class="product-price">R85</span>
+                                <button class="btn-add-cart" data-item="Cape Fynbos G&T" data-price="85">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <line x1="12" y1="5" x2="12" y2="19" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                    </svg>
+                                    <span>Add</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Brandy Sour Royale -->
+                    <article class="product-card" data-category="cocktails" data-price="90"
+                        data-name="Brandy Sour Royale">
+                        <div class="product-card-image">
+                            <div class="image-placeholder placeholder-cocktail">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                    <path d="M8 22h8M12 22V12M6 2l6 10 6-10" />
+                                </svg>
+                                <span>Cocktail Image</span>
+                            </div>
+                            <span class="product-badge badge-signature">SIGNATURE</span>
+                        </div>
+                        <div class="product-card-body">
+                            <span class="product-category">COCKTAIL</span>
+                            <h3 class="product-title">Brandy Sour Royale</h3>
+                            <p class="product-desc">KWV brandy, fresh lemon, honey syrup, and egg white foam. A South
+                                African twist on a classic.</p>
+                            <div class="product-footer">
+                                <span class="product-price">R90</span>
+                                <button class="btn-add-cart" data-item="Brandy Sour Royale" data-price="90">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <line x1="12" y1="5" x2="12" y2="19" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                    </svg>
+                                    <span>Add</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Mzansi Mule -->
+                    <article class="product-card" data-category="cocktails" data-price="80" data-name="Mzansi Mule">
+                        <div class="product-card-image">
+                            <div class="image-placeholder placeholder-cocktail">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                    <path d="M8 22h8M12 22V12M6 2l6 10 6-10" />
+                                </svg>
+                                <span>Cocktail Image</span>
+                            </div>
+                        </div>
+                        <div class="product-card-body">
+                            <span class="product-category">COCKTAIL</span>
+                            <h3 class="product-title">Mzansi Mule</h3>
+                            <p class="product-desc">Local vodka, ginger beer, fresh lime, and a sprig of mint.
+                                Refreshingly African.</p>
+                            <div class="product-footer">
+                                <span class="product-price">R80</span>
+                                <button class="btn-add-cart" data-item="Mzansi Mule" data-price="80">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <line x1="12" y1="5" x2="12" y2="19" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                    </svg>
+                                    <span>Add</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Cart Drawer -->
+    <aside class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer-header">
+            <h3>Your Selection</h3>
+            <button class="cart-drawer-close" id="cartDrawerClose">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+        </div>
+        <div class="cart-drawer-body" id="cartDrawerBody">
+            <div class="cart-empty">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M4 10c0 0 0-3 8-3s8 3 8 3" />
+                    <path d="M3 10h18v2c0 5-3 9-9 9s-9-4-9-9v-2z" />
+                </svg>
+                <p>Your basket is empty</p>
+                <span>Add drinks from the collection to begin your order</span>
+            </div>
+        </div>
+        <div class="cart-drawer-footer" id="cartDrawerFooter" style="display: none;">
+            <div class="cart-subtotal">
+                <span>Subtotal</span>
+                <span id="cartSubtotal">R0</span>
+            </div>
+            <button class="btn-order-now">
+                <span>Order Now</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+            </button>
+        </div>
+    </aside>
+    <div class="cart-drawer-overlay" id="cartDrawerOverlay"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <span class="logo-text">Bertrand</span>
+                        <span class="logo-accent">Cafe</span>
+                    </a>
+                    <p>A maximalist sanctuary of Jazz, Vintage Furniture, and Parisian-style dining.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Winery</h4>
+                    <ul>
+                        <li><a href="#" data-category="wines">Wines</a></li>
+                        <li><a href="#" data-category="spirits">Spirits</a></li>
+                        <li><a href="#" data-category="champagne">Champagne</a></li>
+                        <li><a href="#" data-category="cocktails">Cocktails</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">WhatsApp</a></li>
+                        <li><a href="#">TikTok</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Visit Us</h4>
+                    <address>
+                        296 Fox Street<br>
+                        Maboneng, Johannesburg<br>
+                        South Africa
+                    </address>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Bertrand Cafe. All rights reserved.</p>
+                <p class="footer-tagline">Crafted with <span class="gold">LeChic</span> precision.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="winery-script.js"></script>
+</body>
+
+</html>

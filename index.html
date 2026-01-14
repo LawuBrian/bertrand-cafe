@@ -329,7 +329,16 @@
                             <h3 class="special-name">Green Power Breakfast Bowl</h3>
                             <p class="special-desc">Scrambled eggs, smashed avocado, roasted sweet potato cubes, sautéed
                                 spinach, chili crunch & herb seeds</p>
-                            <span class="special-price">R118</span>
+                            <div class="special-footer">
+                                <span class="special-price">R118</span>
+                                <button class="btn-add-cart" data-item="Green Power Breakfast Bowl" data-price="118">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M12 5v14M5 12h14"></path>
+                                    </svg>
+                                    <span>Add</span>
+                                </button>
+                            </div>
                         </div>
                     </article>
 
@@ -345,7 +354,16 @@
                             <h3 class="special-name">Triple Melt Croque</h3>
                             <p class="special-desc">Toasted sourdough stacked with smoked ham, melted cheese & herb
                                 butter</p>
-                            <span class="special-price">R95</span>
+                            <div class="special-footer">
+                                <span class="special-price">R95</span>
+                                <button class="btn-add-cart" data-item="Triple Melt Croque" data-price="95">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M12 5v14M5 12h14"></path>
+                                    </svg>
+                                    <span>Add</span>
+                                </button>
+                            </div>
                         </div>
                     </article>
 
@@ -360,7 +378,16 @@
                             <h3 class="special-name">Classic Garden Breakfast</h3>
                             <p class="special-desc">Fluffy scrambled eggs, toasted artisan bread, grilled zucchini &
                                 peppers, fresh avocado</p>
-                            <span class="special-price">R105</span>
+                            <div class="special-footer">
+                                <span class="special-price">R105</span>
+                                <button class="btn-add-cart" data-item="Classic Garden Breakfast" data-price="105">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M12 5v14M5 12h14"></path>
+                                    </svg>
+                                    <span>Add</span>
+                                </button>
+                            </div>
                         </div>
                     </article>
 
@@ -376,7 +403,16 @@
                             <h3 class="special-name">Sunrise Mediterranean Bowl</h3>
                             <p class="special-desc">Free-range fried egg over cucumber, cherry tomato, herbs & olive oil
                                 crunch</p>
-                            <span class="special-price">R92</span>
+                            <div class="special-footer">
+                                <span class="special-price">R92</span>
+                                <button class="btn-add-cart" data-item="Sunrise Mediterranean Bowl" data-price="92">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M12 5v14M5 12h14"></path>
+                                    </svg>
+                                    <span>Add</span>
+                                </button>
+                            </div>
                         </div>
                     </article>
 
@@ -391,7 +427,16 @@
                             <h3 class="special-name">Two-Egg Urban Hash</h3>
                             <p class="special-desc">Crispy breakfast potatoes, grilled peppers, two sunny-side eggs &
                                 sliced avocado</p>
-                            <span class="special-price">R110</span>
+                            <div class="special-footer">
+                                <span class="special-price">R110</span>
+                                <button class="btn-add-cart" data-item="Two-Egg Urban Hash" data-price="110">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M12 5v14M5 12h14"></path>
+                                    </svg>
+                                    <span>Add</span>
+                                </button>
+                            </div>
                         </div>
                     </article>
 
@@ -796,6 +841,36 @@
             </div>
         </div>
     </footer>
+
+    <!-- Cart Drawer -->
+    <aside class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer-header">
+            <h3>Your Order</h3>
+            <button class="cart-drawer-close" id="cartDrawerClose">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="cart-drawer-body" id="cartDrawerBody">
+            <div class="cart-empty">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M4 10c0 0 0-3 8-3s8 3 8 3" />
+                    <path d="M3 10h18v2c0 5-3 9-9 9s-9-4-9-9v-2z" />
+                </svg>
+                <p>Your basket is empty</p>
+                <span>Add items from the menu to begin your order</span>
+            </div>
+        </div>
+        <div class="cart-drawer-footer" id="cartDrawerFooter" style="display: none;">
+            <div class="cart-subtotal">
+                <span>Subtotal</span>
+                <span id="cartSubtotal">R0</span>
+            </div>
+            <button class="btn-order-now">Proceed to Checkout</button>
+        </div>
+    </aside>
+    <div class="cart-drawer-overlay" id="cartDrawerOverlay"></div>
 
     <!-- Waitlist Modal -->
     <div class="modal-overlay" id="waitlistModal">

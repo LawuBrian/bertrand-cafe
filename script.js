@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initEditorialKinetic();
     initEventCards();
     initSpecialsCarousel();
+    initCart();
 });
 
 /**
@@ -484,10 +485,176 @@ document.querySelectorAll('.concept-card, .rhythm-card, .editorial-grid').forEac
 /**
  * Cart functionality (placeholder)
  */
-function updateCartCount(count) {
+/**
+ * Cart Functionality
+ */
+let cart = [];
+
+function initCart() {
+    // Cart Elements
+    const cartDrawerClose = document.getElementById('cartDrawerClose');
+    const cartDrawerOverlay = document.getElementById('cartDrawerOverlay');
+    const cartToggle = document.querySelector('.nav-cart');
+    const addToCartBtns = document.querySelectorAll('.btn-add-cart');
+
+    // Toggle Cart
+    if (cartToggle) {
+        cartToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            openCart();
+        });
+    }
+
+    if (cartDrawerClose) {
+        cartDrawerClose.addEventListener('click', closeCart);
+    }
+
+    if (cartDrawerOverlay) {
+        cartDrawerOverlay.addEventListener('click', closeCart);
+    }
+
+    // Add to Cart Buttons
+    addToCartBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const name = btn.dataset.item;
+            const price = parseInt(btn.dataset.price);
+
+            addToCart(name, price);
+
+            // Visual Feedback
+            btn.classList.add('added');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = `
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Added</span>
+            `;
+
+            setTimeout(() => {
+                btn.classList.remove('added');
+                btn.innerHTML = originalHTML;
+            }, 1500);
+        });
+    });
+
+    // Quantity Buttons (Event Delegation)
+    const cartDrawerBody = document.getElementById('cartDrawerBody');
+    if (cartDrawerBody) {
+        cartDrawerBody.addEventListener('click', (e) => {
+            if (e.target.closest('.qty-btn')) {
+                const btn = e.target.closest('.qty-btn');
+                const action = btn.dataset.action;
+                const name = btn.dataset.item;
+
+                if (action === 'increase') {
+                    updateQuantity(name, 1);
+                } else if (action === 'decrease') {
+                    updateQuantity(name, -1);
+                }
+            }
+        });
+    }
+}
+
+function openCart() {
+    const cartDrawer = document.getElementById('cartDrawer');
+    const cartDrawerOverlay = document.getElementById('cartDrawerOverlay');
+    if (cartDrawer && cartDrawerOverlay) {
+        cartDrawer.classList.add('open');
+        cartDrawerOverlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeCart() {
+    const cartDrawer = document.getElementById('cartDrawer');
+    const cartDrawerOverlay = document.getElementById('cartDrawerOverlay');
+    if (cartDrawer && cartDrawerOverlay) {
+        cartDrawer.classList.remove('open');
+        cartDrawerOverlay.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+}
+
+function addToCart(name, price) {
+    const existingItem = cart.find(item => item.name === name);
+
+    if (existingItem) {
+        existingItem.quantity++;
+    } else {
+        cart.push({
+            name: name,
+            price: price,
+            quantity: 1
+        });
+    }
+
+    updateCartUI();
+    openCart();
+}
+
+function updateQuantity(name, delta) {
+    const item = cart.find(item => item.name === name);
+    if (item) {
+        item.quantity += delta;
+        if (item.quantity <= 0) {
+            cart = cart.filter(i => i.name !== name);
+        }
+        updateCartUI();
+    }
+}
+
+function updateCartUI() {
     const cartCount = document.querySelector('.cart-count');
-    if (cartCount) {
-        cartCount.textContent = count;
+    const cartDrawerBody = document.getElementById('cartDrawerBody');
+    const cartDrawerFooter = document.getElementById('cartDrawerFooter');
+    const cartSubtotal = document.getElementById('cartSubtotal');
+
+    // Update Count
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    if (cartCount) cartCount.textContent = totalItems;
+
+    // Update Drawer
+    if (cart.length === 0) {
+        if (cartDrawerBody) {
+            cartDrawerBody.innerHTML = `
+                <div class="cart-empty">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M4 10c0 0 0-3 8-3s8 3 8 3" />
+                        <path d="M3 10h18v2c0 5-3 9-9 9s-9-4-9-9v-2z" />
+                    </svg>
+                    <p>Your basket is empty</p>
+                    <span>Add items from the menu to begin your order</span>
+                </div>
+            `;
+        }
+        if (cartDrawerFooter) cartDrawerFooter.style.display = 'none';
+    } else {
+        let itemsHTML = '';
+        let subtotal = 0;
+
+        cart.forEach(item => {
+            subtotal += item.price * item.quantity;
+            itemsHTML += `
+                <div class="cart-item">
+                    <div class="cart-item-info">
+                        <h4>${item.name}</h4>
+                        <span class="cart-item-price">R${item.price} each</span>
+                    </div>
+                    <div class="cart-item-qty">
+                        <button class="qty-btn" data-action="decrease" data-item="${item.name}">−</button>
+                        <span>${item.quantity}</span>
+                        <button class="qty-btn" data-action="increase" data-item="${item.name}">+</button>
+                    </div>
+                </div>
+            `;
+        });
+
+        if (cartDrawerBody) cartDrawerBody.innerHTML = itemsHTML;
+
+        if (cartSubtotal) cartSubtotal.textContent = `R${subtotal}`;
+        if (cartDrawerFooter) cartDrawerFooter.style.display = 'block';
     }
 }
 

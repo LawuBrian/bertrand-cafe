@@ -5213,6 +5213,184 @@ html {
     scroll-padding-top: 100px;
 }
 
+/* ============================================
+   MOBILE RESPONSIVE - NAVBAR & HERO
+   ============================================ */
+
+/* Mobile Navbar Fixes */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0.5rem 0;
+    }
+    
+    .nav-container {
+        padding: 0 1rem;
+    }
+    
+    /* Smaller logo on mobile */
+    .logo-text {
+        font-size: 1.6rem;
+    }
+    
+    .logo-accent {
+        font-size: 0.6rem;
+        letter-spacing: 0.25em;
+    }
+    
+    /* Hide Explore button text on mobile, show only icon */
+    .nav-explore span {
+        display: none;
+    }
+    
+    .nav-explore {
+        padding: 0.5rem;
+    }
+    
+    /* Smaller icons on mobile */
+    .nav-icon {
+        width: 38px;
+        height: 38px;
+    }
+    
+    .nav-right {
+        gap: 0;
+    }
+    
+    /* Cart count smaller */
+    .cart-count {
+        width: 14px;
+        height: 14px;
+        font-size: 0.55rem;
+        top: 4px;
+        right: 4px;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .logo-text {
+        font-size: 1.4rem;
+    }
+    
+    .logo-accent {
+        font-size: 0.55rem;
+        letter-spacing: 0.2em;
+    }
+    
+    .nav-icon {
+        width: 34px;
+        height: 34px;
+    }
+    
+    .nav-icon svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+/* Mobile Hero Fixes */
+@media (max-width: 768px) {
+    .hero {
+        min-height: 100svh; /* Use small viewport height for iOS */
+        padding-top: 70px; /* Account for fixed navbar */
+    }
+    
+    .hero-content {
+        padding: 1.5rem;
+        max-width: 100%;
+    }
+    
+    .hero-headline {
+        font-size: 2rem;
+        line-height: 1.25;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-headline .highlight {
+        display: inline;
+    }
+    
+    .hero-subheadline {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+        padding: 0 0.5rem;
+    }
+    
+    /* Stack stats vertically or make them compact */
+    .hero-stats {
+        flex-wrap: wrap;
+        gap: 1.5rem 2rem;
+        padding: 0 1rem;
+    }
+    
+    .stat-number {
+        font-size: 2.5rem;
+    }
+    
+    .stat-label {
+        font-size: 0.6rem;
+        letter-spacing: 0.15em;
+    }
+    
+    .stat-divider {
+        display: none;
+    }
+    
+    /* CTA Button */
+    .hero-cta-group {
+        margin: 1.5rem 0;
+    }
+    
+    .btn-large {
+        padding: 1rem 1.5rem;
+        font-size: 0.8rem;
+    }
+    
+    /* Scroll indicator */
+    .hero-scroll-indicator {
+        bottom: 1.5rem;
+    }
+    
+    .hero-scroll-indicator span {
+        font-size: 0.65rem;
+    }
+}
+
+/* Extra small screens - Hero */
+@media (max-width: 480px) {
+    .hero-headline {
+        font-size: 1.7rem;
+    }
+    
+    .hero-subheadline {
+        font-size: 0.9rem;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .stat-label {
+        font-size: 0.55rem;
+    }
+    
+    .hero-stats {
+        gap: 1rem 1.5rem;
+    }
+    
+    .btn-large {
+        padding: 0.9rem 1.25rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* Fix for iOS Safari 100vh issue */
+@supports (-webkit-touch-callout: none) {
+    .hero {
+        min-height: -webkit-fill-available;
+    }
+}
+
 /* Print styles */
 @media print {
 

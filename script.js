@@ -1,0 +1,685 @@
+/**
+ * Bertrand Cafe - Interactive Scripts
+ * A Maximalist Parisian Vogue Experience
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize all modules
+    initNavbar();
+    initExploreMenu();
+    initSearchOverlay();
+    initHeroSlider();
+    initWaitlistModal();
+    initScrollAnimations();
+    initSmoothScroll();
+    initDiagonalBanners();
+    initEditorialKinetic();
+    initEventCards();
+    initSpecialsCarousel();
+});
+
+/**
+ * Navbar - Scroll Effects & State
+ */
+function initNavbar() {
+    const navbar = document.querySelector('.navbar');
+    let lastScroll = 0;
+
+    const handleScroll = () => {
+        const currentScroll = window.pageYOffset;
+
+        // Add scrolled class for background
+        if (currentScroll > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+
+        lastScroll = currentScroll;
+    };
+
+    // Throttle scroll events for performance
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                handleScroll();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+}
+
+/**
+ * Explore Menu - Toggle & Navigation
+ */
+function initExploreMenu() {
+    const exploreToggle = document.getElementById('exploreToggle');
+    const exploreMenu = document.getElementById('exploreMenu');
+    const searchOverlay = document.getElementById('searchOverlay');
+
+    if (!exploreToggle || !exploreMenu) return;
+
+    exploreToggle.addEventListener('click', () => {
+        // Close search if open
+        if (searchOverlay) searchOverlay.classList.remove('active');
+
+        // Toggle explore menu
+        exploreMenu.classList.toggle('active');
+    });
+
+    // Close when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!exploreToggle.contains(e.target) && !exploreMenu.contains(e.target)) {
+            exploreMenu.classList.remove('active');
+        }
+    });
+
+    // Close on link click
+    exploreMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            exploreMenu.classList.remove('active');
+        });
+    });
+
+    // Close on escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            exploreMenu.classList.remove('active');
+        }
+    });
+}
+
+/**
+ * Search Overlay - Toggle & Focus
+ */
+function initSearchOverlay() {
+    const searchToggle = document.getElementById('searchToggle');
+    const searchOverlay = document.getElementById('searchOverlay');
+    const searchInput = document.getElementById('searchInput');
+    const searchClose = document.getElementById('searchClose');
+    const exploreMenu = document.getElementById('exploreMenu');
+
+    if (!searchToggle || !searchOverlay) return;
+
+    searchToggle.addEventListener('click', () => {
+        // Close explore menu if open
+        if (exploreMenu) exploreMenu.classList.remove('active');
+
+        // Toggle search overlay
+        searchOverlay.classList.toggle('active');
+
+        // Focus input
+        if (searchOverlay.classList.contains('active') && searchInput) {
+            setTimeout(() => searchInput.focus(), 300);
+        }
+    });
+
+    // Close button
+    if (searchClose) {
+        searchClose.addEventListener('click', () => {
+            searchOverlay.classList.remove('active');
+        });
+    }
+
+    // Close on escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            searchOverlay.classList.remove('active');
+        }
+    });
+}
+
+/**
+ * Hero Slider - Dynamic Background Images
+ * Auto-advances every 3 seconds: hero-1 → hero-2 → hero-3 → hero-4 → repeat
+ */
+function initHeroSlider() {
+    const slider = document.querySelector('.hero-slider');
+    if (!slider) return;
+
+    const slides = slider.querySelectorAll('.hero-slide');
+    if (slides.length === 0) return;
+
+    let current = 0;
+
+    // Make sure first slide is active
+    slides[0].classList.add('active');
+
+    // Change slide every 3 seconds
+    setInterval(() => {
+        // Remove active from current
+        slides[current].classList.remove('active');
+
+        // Move to next slide (0 → 1 → 2 → 3 → 0...)
+        current = (current + 1) % slides.length;
+
+        // Add active to new current
+        slides[current].classList.add('active');
+    }, 3000);
+}
+
+/**
+ * Waitlist Modal - Open/Close & Form Handling
+ */
+function initWaitlistModal() {
+    const waitlistModal = document.getElementById('waitlistModal');
+    const successModal = document.getElementById('successModal');
+    const waitlistForm = document.getElementById('waitlistForm');
+    const openButtons = document.querySelectorAll('[data-open-waitlist]');
+    const closeButtons = document.querySelectorAll('.modal-close');
+    const continueButtons = document.querySelectorAll('[data-close-modal]');
+
+    // Open waitlist modal
+    openButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Close any open menus
+            document.getElementById('exploreMenu')?.classList.remove('active');
+            document.getElementById('searchOverlay')?.classList.remove('active');
+            openModal(waitlistModal);
+        });
+    });
+
+    // Close modals
+    closeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            closeAllModals();
+        });
+    });
+
+    // Continue buttons
+    continueButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            closeAllModals();
+        });
+    });
+
+    // Close on overlay click
+    [waitlistModal, successModal].forEach(modal => {
+        if (modal) {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeAllModals();
+                }
+            });
+        }
+    });
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeAllModals();
+        }
+    });
+
+    // Form submission
+    if (waitlistForm) {
+        waitlistForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            handleFormSubmission(waitlistForm, waitlistModal, successModal);
+        });
+    }
+}
+
+/**
+ * Open a modal
+ */
+function openModal(modal) {
+    if (!modal) return;
+    document.body.style.overflow = 'hidden';
+    modal.classList.add('active');
+
+    // Focus first input
+    const firstInput = modal.querySelector('input');
+    if (firstInput) {
+        setTimeout(() => firstInput.focus(), 300);
+    }
+}
+
+/**
+ * Close all modals
+ */
+function closeAllModals() {
+    document.body.style.overflow = '';
+    document.querySelectorAll('.modal-overlay').forEach(modal => {
+        modal.classList.remove('active');
+    });
+}
+
+/**
+ * Handle form submission
+ */
+function handleFormSubmission(form, waitlistModal, successModal) {
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    // Simulate API call (replace with actual endpoint)
+    console.log('Waitlist submission:', data);
+
+    // Store in localStorage for demo purposes
+    const waitlist = JSON.parse(localStorage.getItem('bertrand_waitlist') || '[]');
+    waitlist.push({
+        ...data,
+        timestamp: new Date().toISOString()
+    });
+    localStorage.setItem('bertrand_waitlist', JSON.stringify(waitlist));
+
+    // Show success modal
+    closeAllModals();
+    setTimeout(() => {
+        openModal(successModal);
+        form.reset();
+    }, 300);
+}
+
+/**
+ * Scroll Animations - Intersection Observer
+ */
+function initScrollAnimations() {
+    const animatedElements = document.querySelectorAll('.concept-card, .rhythm-card, .diagonal-banner');
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    animatedElements.forEach(el => {
+        observer.observe(el);
+    });
+
+    // Parallax effect for hero section
+    const hero = document.querySelector('.hero');
+    if (hero) {
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroContent = document.querySelector('.hero-content');
+            if (heroContent && scrolled < window.innerHeight) {
+                heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
+                heroContent.style.opacity = 1 - (scrolled / window.innerHeight) * 0.5;
+            }
+        });
+    }
+}
+
+/**
+ * Editorial Kinetic Typography - Scroll-linked headline animation
+ */
+function initEditorialKinetic() {
+    const headline = document.querySelector('.kinetic-headline');
+    if (!headline) return;
+
+    const words = headline.querySelectorAll('.kinetic-word');
+    const totalWords = words.length;
+    if (totalWords === 0) return;
+
+    let ticking = false;
+
+    function updateHeadline() {
+        const headlineRect = headline.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+
+        // Calculate when headline enters viewport
+        const headlineTop = headlineRect.top;
+        const headlineCenter = headlineTop + (headlineRect.height / 2);
+
+        // Progress: 0 = headline at bottom of viewport, 1 = headline at top
+        // Start animating when headline is 80% up from bottom
+        const startPoint = viewportHeight * 0.85;
+        const endPoint = viewportHeight * 0.3;
+
+        let progress = 0;
+        if (headlineCenter < startPoint) {
+            progress = Math.min(1, Math.max(0, (startPoint - headlineCenter) / (startPoint - endPoint)));
+        }
+
+        // Light up words based on progress
+        const litWordCount = Math.floor(progress * totalWords);
+        const partialProgress = (progress * totalWords) % 1;
+
+        words.forEach((word, index) => {
+            word.classList.remove('lit', 'partial');
+
+            if (index < litWordCount) {
+                word.classList.add('lit');
+            } else if (index === litWordCount && partialProgress > 0.2) {
+                word.classList.add('partial');
+            }
+        });
+
+        ticking = false;
+    }
+
+    function onScroll() {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                updateHeadline();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    updateHeadline();
+}
+
+/**
+ * Diagonal Banners - Subtle Parallax Effect
+ */
+function initDiagonalBanners() {
+    const banners = document.querySelectorAll('.diagonal-banner');
+
+    banners.forEach(banner => {
+        const bg = banner.querySelector('.banner-bg');
+
+        // Subtle parallax on mouse move - background only
+        banner.addEventListener('mousemove', (e) => {
+            const rect = banner.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            // Calculate percentage position (-1 to 1)
+            const xPercent = (x / rect.width - 0.5) * 2;
+            const yPercent = (y / rect.height - 0.5) * 2;
+
+            // Apply subtle parallax to background
+            if (bg) {
+                bg.style.transform = `scale(1.05) translate(${xPercent * -5}px, ${yPercent * -3}px)`;
+            }
+        });
+
+        // Reset on mouse leave
+        banner.addEventListener('mouseleave', () => {
+            if (bg) {
+                bg.style.transform = '';
+            }
+        });
+    });
+}
+
+/**
+ * Smooth Scroll - Navigation Links
+ */
+function initSmoothScroll() {
+    const links = document.querySelectorAll('a[href^="#"]');
+
+    links.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            if (href === '#') return;
+
+            e.preventDefault();
+            const target = document.querySelector(href);
+
+            if (target) {
+                // Close any open menus
+                document.getElementById('exploreMenu')?.classList.remove('active');
+                document.getElementById('searchOverlay')?.classList.remove('active');
+
+                // Scroll to target
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+}
+
+/**
+ * Utility - Debounce function
+ */
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+/**
+ * Utility - Throttle function
+ */
+function throttle(func, limit) {
+    let inThrottle;
+    return function (...args) {
+        if (!inThrottle) {
+            func.apply(this, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+}
+
+/**
+ * Add subtle hover effects to cards and editorial grid
+ */
+document.querySelectorAll('.concept-card, .rhythm-card, .editorial-grid').forEach(element => {
+    element.addEventListener('mousemove', (e) => {
+        const rect = element.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        element.style.setProperty('--mouse-x', `${x}px`);
+        element.style.setProperty('--mouse-y', `${y}px`);
+    });
+});
+
+/**
+ * Cart functionality (placeholder)
+ */
+function updateCartCount(count) {
+    const cartCount = document.querySelector('.cart-count');
+    if (cartCount) {
+        cartCount.textContent = count;
+    }
+}
+
+/**
+ * Event Cards - Card Click & Deck Animation
+ */
+function initEventCards() {
+    const eventsSection = document.querySelector('.events-banner-section');
+    const eventsCard = document.getElementById('eventsBanner');
+    const eventsClose = document.getElementById('eventsClose');
+    const eventCards = document.querySelectorAll('.event-card');
+
+    if (!eventsSection || !eventsCard) return;
+
+    // Add mouse tracking for glow effect on events card
+    eventsCard.addEventListener('mousemove', (e) => {
+        const rect = eventsCard.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        eventsCard.style.setProperty('--mouse-x', `${x}px`);
+        eventsCard.style.setProperty('--mouse-y', `${y}px`);
+    });
+
+    // Click card to expand
+    eventsCard.addEventListener('click', () => {
+        eventsSection.classList.add('expanded');
+
+        // Scroll to expanded section smoothly
+        setTimeout(() => {
+            const expandedSection = document.getElementById('eventsExpanded');
+            if (expandedSection) {
+                expandedSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }, 100);
+    });
+
+    // Close button
+    if (eventsClose) {
+        eventsClose.addEventListener('click', (e) => {
+            e.stopPropagation();
+            eventsSection.classList.remove('expanded');
+
+            // Scroll back to events card
+            setTimeout(() => {
+                eventsSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+        });
+    }
+
+    // Close on escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && eventsSection.classList.contains('expanded')) {
+            eventsSection.classList.remove('expanded');
+        }
+    });
+
+    // Add 3D tilt effect on individual card hover
+    eventCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            // Disable on mobile
+            if (window.innerWidth <= 768) return;
+
+            if (!eventsSection.classList.contains('expanded')) return;
+
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = (y - centerY) / 25;
+            const rotateY = (centerX - x) / 25;
+
+            card.querySelector('.card-inner').style.transform =
+                `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            // Disable on mobile
+            if (window.innerWidth <= 768) return;
+
+            card.querySelector('.card-inner').style.transform = '';
+        });
+    });
+
+    // Mobile: Solitaire-style tap-to-spread deck
+    const cardsDeck = document.getElementById('cardsDeck');
+    const deckTapHint = document.getElementById('deckTapHint');
+
+    if (cardsDeck) {
+        // Check if we're on mobile
+        const isMobile = () => window.innerWidth <= 768;
+
+        // Toggle deck spread on tap (mobile only)
+        cardsDeck.addEventListener('click', (e) => {
+            if (!isMobile()) return;
+            if (!eventsSection.classList.contains('expanded')) return;
+
+            // Don't toggle if clicking on a card in spread state
+            const clickedCard = e.target.closest('.event-card');
+            if (clickedCard && cardsDeck.classList.contains('deck-spread')) {
+                // Card was clicked in spread state - could add navigation here
+                return;
+            }
+
+            // Toggle spread state
+            cardsDeck.classList.toggle('deck-spread');
+        });
+
+        // Reset deck when section closes
+        if (eventsClose) {
+            const originalCloseHandler = eventsClose.onclick;
+            eventsClose.addEventListener('click', () => {
+                cardsDeck.classList.remove('deck-spread');
+            });
+        }
+
+        // Also reset on escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && eventsSection.classList.contains('expanded')) {
+                cardsDeck.classList.remove('deck-spread');
+            }
+        });
+    }
+}
+
+/**
+ * Console branding
+ */
+/**
+ * Specials Carousel - Horizontal Scroll Navigation
+ */
+function initSpecialsCarousel() {
+    const carousel = document.getElementById('specialsCarousel');
+    const prevBtn = document.querySelector('.specials-nav-prev');
+    const nextBtn = document.querySelector('.specials-nav-next');
+
+    if (!carousel) return;
+
+    const scrollAmount = 300; // Pixels to scroll per click
+
+    // Previous button
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            carousel.scrollBy({
+                left: -scrollAmount,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    // Next button
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            carousel.scrollBy({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    // Update button visibility based on scroll position
+    function updateNavButtons() {
+        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+
+        if (prevBtn) {
+            prevBtn.style.opacity = carousel.scrollLeft <= 10 ? '0.3' : '1';
+            prevBtn.style.pointerEvents = carousel.scrollLeft <= 10 ? 'none' : 'auto';
+        }
+
+        if (nextBtn) {
+            nextBtn.style.opacity = carousel.scrollLeft >= maxScroll - 10 ? '0.3' : '1';
+            nextBtn.style.pointerEvents = carousel.scrollLeft >= maxScroll - 10 ? 'none' : 'auto';
+        }
+    }
+
+    // Initial check
+    updateNavButtons();
+
+    // Update on scroll
+    carousel.addEventListener('scroll', updateNavButtons);
+
+    // Update on resize
+    window.addEventListener('resize', updateNavButtons);
+}
+
+console.log(
+    '%c Bertrand Cafe ',
+    'background: #1a1a1a; color: #c9a962; font-size: 20px; font-weight: bold; padding: 10px 20px; font-family: Georgia, serif;'
+);
+console.log(
+    '%c The Soul of Maboneng. Reimagined. ',
+    'color: #a0a0a0; font-size: 12px; font-family: -apple-system, sans-serif;'
+);

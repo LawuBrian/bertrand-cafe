@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bertrand Cafe | The Soul of Maboneng. Reimagined.</title>
+    <meta name="description"
+        content="A maximalist sanctuary of Jazz, Vintage Furniture, and Parisian-style dining at 296 Fox Street, Maboneng, Johannesburg.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Full-Site Video Background -->
+    <div class="video-background">
+        <video autoplay muted loop playsinline id="bgVideo">
+            <source src="background_video/4K Space Star scene - Free M.G Stock Footage (1080p).mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Left: Explore Menu + Nav Links -->
+            <div class="nav-left">
+                <button class="nav-explore" id="exploreToggle">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="6" x2="21" y2="6" />
+                        <line x1="3" y1="12" x2="21" y2="12" />
+                        <line x1="3" y1="18" x2="21" y2="18" />
+                    </svg>
+                    <span>Explore</span>
+                </button>
+                <nav class="nav-links">
+                    <a href="#" class="nav-link">Shop</a>
+                    <a href="#events" class="nav-link">Events</a>
+                    <a href="about.html" class="nav-link">About Us</a>
+                </nav>
+            </div>
+
+            <!-- Center: Logo -->
+            <a href="#" class="logo">
+                <span class="logo-text">Bertrand</span>
+                <span class="logo-accent">Cafe</span>
+            </a>
+
+            <!-- Right: Icons -->
+            <div class="nav-right">
+                <button class="nav-icon" aria-label="Search" id="searchToggle">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="M21 21l-4.35-4.35" />
+                    </svg>
+                </button>
+                <button class="nav-icon" aria-label="Account" data-open-waitlist>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>
+                </button>
+                <button class="nav-icon nav-cart" aria-label="Basket" id="cartToggle">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8">
+                        <!-- Fruit Basket Icon -->
+                        <path d="M4 10c0 0 0-3 8-3s8 3 8 3" />
+                        <path d="M3 10h18v2c0 5-3 9-9 9s-9-4-9-9v-2z" />
+                        <path d="M12 7V4" />
+                        <path d="M10 5c0-1.5 1-2 2-2s2 .5 2 2" />
+                        <circle cx="8" cy="14" r="1.5" fill="currentColor" />
+                        <circle cx="12" cy="16" r="1.5" fill="currentColor" />
+                        <circle cx="16" cy="14" r="1.5" fill="currentColor" />
+                    </svg>
+                    <span class="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Explore Dropdown Menu -->
+        <div class="explore-menu" id="exploreMenu">
+            <div class="explore-menu-inner">
+                <div class="explore-column">
+                    <h4>Experience</h4>
+                    <ul>
+                        <li><a href="#concept">The Concept</a></li>
+                        <li><a href="#lounges">The Lounges</a></li>
+                        <li><a href="#rhythm">Weekly Rhythm</a></li>
+                        <li><a href="#newsletter">Newsletter</a></li>
+                    </ul>
+                </div>
+                <div class="explore-column">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="#specials">Specials</a></li>
+                        <li><a href="#events">Events</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="explore-column">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="#" data-open-waitlist>Join Waitlist</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Overlay -->
+        <div class="search-overlay" id="searchOverlay">
+            <div class="search-container">
+                <input type="text" placeholder="Search experiences, events, spaces..." class="search-input"
+                    id="searchInput">
+                <button class="search-close" id="searchClose">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero" id="home">
+        <!-- Dynamic Background Slider -->
+        <div class="hero-slider">
+            <div class="hero-slide active" style="background-image: url('images/hero-1.jpg')"></div>
+            <div class="hero-slide" style="background-image: url('images/hero-2.jpg')"></div>
+            <div class="hero-slide" style="background-image: url('images/hero-3.jpg')"></div>
+            <div class="hero-slide" style="background-image: url('images/hero-4.jpg')"></div>
+            <div class="hero-slide hero-slide-5" style="background-image: url('images/hero-5.jpg')"></div>
+        </div>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <h1 class="hero-headline">
+                The Soul of Maboneng.
+                <span class="highlight">Reimagined.</span>
+            </h1>
+            <p class="hero-subheadline">
+                A maximalist sanctuary of Jazz, Vintage Furniture, and Parisian-style dining at 296 Fox Street.
+            </p>
+
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">8</span>
+                    <span class="stat-label">Years of Legacy</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-number">5</span>
+                    <span class="stat-label">Unique Lounges</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-number">7</span>
+                    <span class="stat-label">Weekly Events</span>
+                </div>
+            </div>
+
+            <div class="hero-cta-group">
+                <button class="btn btn-primary btn-large" data-open-waitlist>Reserve your place</button>
+            </div>
+        </div>
+
+        <!-- Slider Navigation -->
+        <div class="hero-slider-nav">
+            <button class="slider-dot active" data-slide="0"></button>
+            <button class="slider-dot" data-slide="1"></button>
+            <button class="slider-dot" data-slide="2"></button>
+            <button class="slider-dot" data-slide="3"></button>
+        </div>
+
+        <div class="hero-scroll-indicator">
+            <span>Scroll to explore</span>
+            <div class="scroll-line"></div>
+        </div>
+    </header>
+
+    <!-- Editorial Story Section -->
+    <section class="editorial-section" id="story">
+        <div class="editorial-container">
+            <!-- Kinetic Headline -->
+            <header class="editorial-headline">
+                <h2 class="kinetic-headline">
+                    <span class="kinetic-word">From</span>
+                    <span class="kinetic-word">Brazzaville</span>
+                    <span class="kinetic-word">to</span>
+                    <span class="kinetic-word">Fox</span>
+                    <span class="kinetic-word">Street:</span>
+                    <span class="kinetic-word">A</span>
+                    <span class="kinetic-word">Visionary</span>
+                    <span class="kinetic-word">Journey.</span>
+                </h2>
+            </header>
+
+            <!-- Two Column Layout -->
+            <div class="editorial-grid">
+                <!-- Left: Main Image -->
+                <div class="editorial-image-col">
+                    <figure class="editorial-figure">
+                        <img src="images/headline_image.jpeg" alt="Inside Bertrand Cafe" class="editorial-img">
+                        <figcaption class="editorial-caption">The soul of Maboneng, captured in every corner
+                        </figcaption>
+                    </figure>
+                    <img src="images/signature.png" alt="Bertrand Signature" class="editorial-signature">
+                </div>
+
+                <!-- Right: Body Text + Secondary Image -->
+                <div class="editorial-text-col">
+                    <div class="editorial-body">
+                        <p>Bertrand began with the heartbeat of its founder, Mr. Bertrand. Shaped by his European
+                            travels and a deep family connection to France, he dreamed of bringing the elegant, lived-in
+                            charm of Parisian café culture to Johannesburg—a city that offered him the opportunity to
+                            turn vision into reality.</p>
+                    </div>
+                    <figure class="editorial-figure-secondary">
+                        <img src="images/body_image.jpeg" alt="Bertrand Cafe cuisine" class="editorial-img-secondary">
+                    </figure>
+                    <div class="editorial-body editorial-body-continued">
+                        <p>Originally from Brazzaville, Congo, Mr. Bertrand's journey started with a humble cafeteria.
+                            Today, through resilience and a partnership with Gladys Semenye's standards, Bertrand has
+                            evolved into an 8-year landmark. It is more than a restaurant; it is a museum of collectible
+                            vintage furniture and a sanctuary for thinkers, artists, and the open-minded.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diamond Divider -->
+    <div class="diamond-divider">
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+    </div>
+
+    <!-- Banners Heading Section -->
+    <div class="banners-heading">
+        <span class="banners-tag">Curate Your Visit</span>
+        <h2 class="banners-title">Dine. Reserve. Indulge.</h2>
+    </div>
+
+    <!-- Diagonal Feature Banners -->
+    <section class="diagonal-banners" id="features">
+        <div class="diagonal-banner" data-banner="menu">
+            <a href="menu.html" class="banner-link">
+                <div class="banner-bg"></div>
+                <div class="banner-overlay"></div>
+                <div class="banner-content">
+                    <span class="banner-title">MENU</span>
+                    <span class="banner-subtitle">Culinary Artistry</span>
+                </div>
+            </a>
+        </div>
+        <div class="diagonal-banner" data-banner="reservations">
+            <a href="reservations.html" class="banner-link">
+                <div class="banner-bg"></div>
+                <div class="banner-overlay"></div>
+                <div class="banner-content">
+                    <span class="banner-title">RESERVATIONS</span>
+                    <span class="banner-subtitle">Book Your Experience</span>
+                </div>
+            </a>
+        </div>
+        <div class="diagonal-banner" data-banner="winery">
+            <div class="banner-bg"></div>
+            <div class="banner-overlay"></div>
+            <div class="banner-content">
+                <span class="banner-title">WINERY</span>
+                <span class="banner-subtitle">Curated Selections</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diamond Divider -->
+    <div class="diamond-divider">
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+    </div>
+
+    <!-- Specials Section - Dishoom Style -->
+    <section class="specials-section" id="specials">
+        <div class="specials-header">
+            <span class="specials-tag">CHEF'S MORNING SELECTION</span>
+            <h2 class="specials-title">A selection of the finest breakfast & brunch plates</h2>
+        </div>
+
+        <div class="specials-carousel-wrapper">
+            <button class="specials-nav specials-nav-prev" aria-label="Previous">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6" />
+                </svg>
+            </button>
+
+            <div class="specials-carousel" id="specialsCarousel">
+                <div class="specials-track">
+                    <!-- Green Power Breakfast Bowl -->
+                    <article class="special-card">
+                        <div class="special-image-wrapper">
+                            <img src="images/PHOTO-2026-01-09-19-40-51 3.jpg" alt="Green Power Breakfast Bowl"
+                                class="special-image">
+                            <span class="special-badge badge-signature">SIGNATURE</span>
+                        </div>
+                        <div class="special-details">
+                            <span class="special-category">BOWLS</span>
+                            <h3 class="special-name">Green Power Breakfast Bowl</h3>
+                            <p class="special-desc">Scrambled eggs, smashed avocado, roasted sweet potato cubes, sautéed
+                                spinach, chili crunch & herb seeds</p>
+                            <span class="special-price">R118</span>
+                        </div>
+                    </article>
+
+                    <!-- Triple Melt Croque -->
+                    <article class="special-card">
+                        <div class="special-image-wrapper">
+                            <img src="images/PHOTO-2026-01-09-19-40-51 2.jpg" alt="Triple Melt Croque"
+                                class="special-image">
+                            <span class="special-badge badge-classic">CAFÉ CLASSIC</span>
+                        </div>
+                        <div class="special-details">
+                            <span class="special-category">TOASTIES</span>
+                            <h3 class="special-name">Triple Melt Croque</h3>
+                            <p class="special-desc">Toasted sourdough stacked with smoked ham, melted cheese & herb
+                                butter</p>
+                            <span class="special-price">R95</span>
+                        </div>
+                    </article>
+
+                    <!-- Classic Garden Breakfast -->
+                    <article class="special-card">
+                        <div class="special-image-wrapper">
+                            <img src="images/PHOTO-2026-01-09-19-40-51 5.jpg" alt="Classic Garden Breakfast"
+                                class="special-image">
+                        </div>
+                        <div class="special-details">
+                            <span class="special-category">MAINS</span>
+                            <h3 class="special-name">Classic Garden Breakfast</h3>
+                            <p class="special-desc">Fluffy scrambled eggs, toasted artisan bread, grilled zucchini &
+                                peppers, fresh avocado</p>
+                            <span class="special-price">R105</span>
+                        </div>
+                    </article>
+
+                    <!-- Sunrise Mediterranean Bowl -->
+                    <article class="special-card">
+                        <div class="special-image-wrapper">
+                            <img src="images/PHOTO-2026-01-09-19-40-51 4.jpg" alt="Sunrise Mediterranean Bowl"
+                                class="special-image">
+                            <span class="special-badge badge-fresh">FRESH</span>
+                        </div>
+                        <div class="special-details">
+                            <span class="special-category">SALADS</span>
+                            <h3 class="special-name">Sunrise Mediterranean Bowl</h3>
+                            <p class="special-desc">Free-range fried egg over cucumber, cherry tomato, herbs & olive oil
+                                crunch</p>
+                            <span class="special-price">R92</span>
+                        </div>
+                    </article>
+
+                    <!-- Two-Egg Urban Hash -->
+                    <article class="special-card">
+                        <div class="special-image-wrapper">
+                            <img src="images/PHOTO-2026-01-09-19-40-51 6 (1).jpg" alt="Two-Egg Urban Hash"
+                                class="special-image">
+                        </div>
+                        <div class="special-details">
+                            <span class="special-category">MAINS</span>
+                            <h3 class="special-name">Two-Egg Urban Hash</h3>
+                            <p class="special-desc">Crispy breakfast potatoes, grilled peppers, two sunny-side eggs &
+                                sliced avocado</p>
+                            <span class="special-price">R110</span>
+                        </div>
+                    </article>
+
+                    <!-- French Country Quiche -->
+                    <article class="special-card">
+                        <div class="special-image-wrapper">
+                            <img src="images/PHOTO-2026-01-09-19-40-51 7.jpg" alt="French Country Quiche"
+                                class="special-image">
+                            <span class="special-badge badge-classic">CAFÉ CLASSIC</span>
+                        </div>
+                        <div class="special-details">
+                            <span class="special-category">PASTRY</span>
+                            <h3 class="special-name">French Country Quiche</h3>
+                            <p class="special-desc">Flaky pastry filled with egg custard, zucchini, smoked bacon & herbs
+                            </p>
+                            <span class="special-price">R78</span>
+                        </div>
+                    </article>
+
+                    <!-- Breakfast Skillet Pizza -->
+                    <article class="special-card">
+                        <div class="special-image-wrapper">
+                            <img src="images/PHOTO-2026-01-09-19-40-51.jpg" alt="Breakfast Skillet Pizza"
+                                class="special-image">
+                            <span class="special-badge badge-signature">SIGNATURE</span>
+                        </div>
+                        <div class="special-details">
+                            <span class="special-category">SKILLETS</span>
+                            <h3 class="special-name">Breakfast Skillet Pizza</h3>
+                            <p class="special-desc">Egg-based base topped with tomato, mozzarella, basil & fresh greens
+                            </p>
+                            <span class="special-price">R115</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <button class="specials-nav specials-nav-next" aria-label="Next">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </button>
+        </div>
+    </section>
+
+    <!-- Diamond Divider -->
+    <div class="diamond-divider">
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+    </div>
+
+    <!-- Events Section - Card Style like Cafeteria -->
+    <section class="events-banner-section" id="events">
+        <div class="container">
+            <!-- Events Card (like Cafeteria) -->
+            <div class="events-card" id="eventsBanner">
+                <div class="events-card-inner">
+                    <div class="events-card-icon">
+                        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="8" y="12" width="48" height="40" rx="2" />
+                            <path d="M8 24h48" />
+                            <circle cx="20" cy="18" r="2" />
+                            <circle cx="32" cy="18" r="2" />
+                            <circle cx="44" cy="18" r="2" />
+                            <path d="M20 34h8M20 42h24" />
+                        </svg>
+                    </div>
+                    <h3 class="events-card-title">Occasional Events</h3>
+                    <p class="events-card-desc">Curated evenings of jazz, exclusive dining experiences, and spectacular
+                        dinner shows.</p>
+                    <span class="events-card-accent">Click to Explore →</span>
+
+                    <!-- Mini deck preview -->
+                    <div class="mini-deck-preview">
+                        <div class="mini-card" style="background-image: url('images/JazzNite.jpeg')"></div>
+                        <div class="mini-card" style="background-image: url('images/TheVelvetTable.jpeg')"></div>
+                        <div class="mini-card"
+                            style="background-image: url('images/ChristmasDinnerShowWithTheFellas.jpeg')"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expanded Deck State -->
+        <div class="events-expanded" id="eventsExpanded">
+            <button class="events-close" id="eventsClose" aria-label="Close events">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+            </button>
+
+            <div class="events-expanded-header">
+                <span class="events-expanded-tag">Occasional Events</span>
+                <h2 class="events-expanded-title">Curated Evenings</h2>
+            </div>
+
+            <!-- Deck of Cards -->
+            <div class="cards-deck" id="cardsDeck">
+                <div class="deck-tap-hint" id="deckTapHint">
+                    <span>Tap to spread</span>
+                </div>
+                <div class="card-wrapper">
+                    <div class="event-card" data-card="1">
+                        <div class="card-inner">
+                            <div class="card-image" style="background-image: url('images/JazzNite.jpeg')"></div>
+                            <div class="card-overlay"></div>
+                            <div class="card-content">
+                                <span class="card-tag">Live Music</span>
+                                <h3 class="card-title">Jazz Nite</h3>
+                                <p class="card-desc">An intimate evening of soulful melodies</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="event-card" data-card="2">
+                        <div class="card-inner">
+                            <div class="card-image" style="background-image: url('images/TheVelvetTable.jpeg')"></div>
+                            <div class="card-overlay"></div>
+                            <div class="card-content">
+                                <span class="card-tag">Exclusive Dining</span>
+                                <h3 class="card-title">The Velvet Table</h3>
+                                <p class="card-desc">Where elegance meets gastronomy</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="event-card" data-card="3">
+                        <div class="card-inner">
+                            <div class="card-image"
+                                style="background-image: url('images/ChristmasDinnerShowWithTheFellas.jpeg')"></div>
+                            <div class="card-overlay"></div>
+                            <div class="card-content">
+                                <span class="card-tag">Seasonal Special</span>
+                                <h3 class="card-title">Dinner Shows</h3>
+                                <p class="card-desc">Spectacular performances & fine cuisine</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diamond Divider -->
+    <div class="diamond-divider">
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+    </div>
+
+    <!-- Weekly Rhythm Section -->
+    <section class="rhythm-section" id="rhythm">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">The Calendar</span>
+                <h2 class="section-title">The Weekly <span class="highlight">Rhythm</span></h2>
+                <p class="section-description">
+                    From the high-stakes Monday Dice Roll to the soulful Saturday Jazz Legacy—every day at Bertrand is a
+                    curated experience.
+                </p>
+            </div>
+
+            <div class="rhythm-timeline">
+                <div class="rhythm-card" data-day="monday">
+                    <div class="rhythm-day">
+                        <span class="day-name">Monday</span>
+                    </div>
+                    <div class="rhythm-content">
+                        <h3>The Dice Roll</h3>
+                        <p>Groups of 12, R3,000 bill cap. Roll a 6 and your entire bill vanishes. High stakes. Pure
+                            thrill.</p>
+                        <span class="rhythm-tag">Fortune Favors the Bold</span>
+                    </div>
+                </div>
+
+                <div class="rhythm-card" data-day="tuesday">
+                    <div class="rhythm-day">
+                        <span class="day-name">Tuesday</span>
+                    </div>
+                    <div class="rhythm-content">
+                        <h3>Cinema Night</h3>
+                        <p>Curated screenings of cinematic masterpieces. Film meets fine dining in an intimate setting.
+                        </p>
+                        <span class="rhythm-tag">Silver Screen Soirée</span>
+                    </div>
+                </div>
+
+                <div class="rhythm-card" data-day="wednesday">
+                    <div class="rhythm-day">
+                        <span class="day-name">Wednesday</span>
+                    </div>
+                    <div class="rhythm-content">
+                        <h3>Karaoke à la Paris</h3>
+                        <p>Step into the spotlight. French chanson, African soul, global hits—your stage awaits.</p>
+                        <span class="rhythm-tag">Voices Unleashed</span>
+                    </div>
+                </div>
+
+                <div class="rhythm-card" data-day="thursday">
+                    <div class="rhythm-day">
+                        <span class="day-name">Thursday</span>
+                    </div>
+                    <div class="rhythm-content">
+                        <h3>Duality Night</h3>
+                        <p>Upstairs: Charity Poker with purpose. Downstairs: Games Night for the spirited. Choose your
+                            floor.</p>
+                        <span class="rhythm-tag">Two Worlds, One Roof</span>
+                    </div>
+                </div>
+
+                <div class="rhythm-card" data-day="friday">
+                    <div class="rhythm-day">
+                        <span class="day-name">Friday</span>
+                    </div>
+                    <div class="rhythm-content">
+                        <h3>Open Mic & Velvet Table</h3>
+                        <p>Comedy. Poetry. Raw talent. Monthly: The Velvet Table—an exclusive game meat and wine pairing
+                            experience.</p>
+                        <span class="rhythm-tag">Art & Gastronomy</span>
+                    </div>
+                </div>
+
+                <div class="rhythm-card" data-day="saturday">
+                    <div class="rhythm-day">
+                        <span class="day-name">Saturday</span>
+                    </div>
+                    <div class="rhythm-content">
+                        <h3>Live Jazz Legacy</h3>
+                        <p>The crown jewel of our week. World-class jazz ensembles. The spirit of New Orleans meets
+                            Johannesburg.</p>
+                        <span class="rhythm-tag">The Signature Night</span>
+                    </div>
+                </div>
+
+                <div class="rhythm-card" data-day="sunday">
+                    <div class="rhythm-day">
+                        <span class="day-name">Sunday</span>
+                    </div>
+                    <div class="rhythm-content">
+                        <h3>Moon Bloom Buffet</h3>
+                        <p>A lavish buffet spread accompanied by soulful DJ sets. The perfect week's end celebration.
+                        </p>
+                        <span class="rhythm-tag">Sunday Sanctuary</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MOVED TO ABOUT PAGE - Lounges Section
+    <section class="concept-section" id="lounges">
+        ... The Cafeteria, Salon de Thé, Wine Lounge, Cigar Lounge, Jazz Lounge, The Bottle Keep ...
+    </section>
+    END MOVED TO ABOUT PAGE -->
+
+    <!-- MOVED TO ABOUT PAGE - Heritage Section
+    <section class="heritage-section" id="heritage">
+        ... Our Story / Eight Years of LeChic Excellence ...
+    </section>
+    END MOVED TO ABOUT PAGE -->
+
+    <!-- Diamond Divider -->
+    <div class="diamond-divider">
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+    </div>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section" id="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <div class="newsletter-header">
+                    <span class="newsletter-tag">NEWSLETTER</span>
+                    <h2 class="newsletter-title">Subscribe to <span class="highlight">The Bertrand</span> Newsletter
+                    </h2>
+                    <p class="newsletter-desc">First-dibs on new launches, exclusive events, seasonal menus and other
+                        Bertrand goings-on — straight to your inbox.</p>
+                </div>
+
+                <form class="newsletter-form" id="newsletterForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">FIRST NAME</label>
+                            <input type="text" id="firstName" name="firstName" placeholder="Kindly enter your name"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="emailAddress">EMAIL ADDRESS</label>
+                            <input type="email" id="emailAddress" name="email"
+                                placeholder="Kindly enter your email address" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="birthday">BIRTHDAY (OPTIONAL)</label>
+                            <input type="date" id="birthday" name="birthday" placeholder="For an annual surprise">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group form-checkbox">
+                            <input type="checkbox" id="consent" name="consent" required>
+                            <label for="consent">I consent to receive occasional emails with news about events, menus,
+                                and special offerings, in accordance with Bertrand's <a href="#">Privacy
+                                    Policy</a>.</label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-newsletter">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diamond Divider -->
+    <div class="diamond-divider">
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+        <span class="diamond">◆</span>
+    </div>
+
+    <!-- Final CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Be Among the First</h2>
+                <p>Join our exclusive waitlist for priority access to our reimagined experience. Limited spots.
+                    Unlimited memories.</p>
+                <button class="btn btn-primary btn-large" data-open-waitlist>
+                    <span>Reserve Your Place</span>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <span class="logo-text">Bertrand</span>
+                        <span class="logo-accent">Cafe</span>
+                    </a>
+                    <p>A maximalist sanctuary of Jazz, Vintage Furniture, and Parisian-style dining.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Experience</h4>
+                    <ul>
+                        <li><a href="#specials">Specials</a></li>
+                        <li><a href="#events">Events</a></li>
+                        <li><a href="#rhythm">Weekly Rhythm</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">WhatsApp</a></li>
+                        <li><a href="#">TikTok</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Visit Us</h4>
+                    <address>
+                        296 Fox Street<br>
+                        Maboneng, Johannesburg<br>
+                        South Africa
+                    </address>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Bertrand Cafe. All rights reserved.</p>
+                <p class="footer-tagline">Crafted with <span class="gold">LeChic</span> precision.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Waitlist Modal -->
+    <div class="modal-overlay" id="waitlistModal">
+        <div class="modal">
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="modal-icon">✦</span>
+                    <h2>Join the Exclusive Waitlist</h2>
+                    <p>Be among the first to experience the reimagined Bertrand Maboneng.</p>
+                </div>
+                <form class="waitlist-form" id="waitlistForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+                    </div>
+                    <div class="form-group">
+                        <label for="interest">Primary Interest</label>
+                        <select id="interest" name="interest">
+                            <option value="">Select your interest</option>
+                            <option value="dining">The Cafeteria - Fine Dining</option>
+                            <option value="tea">Salon de Thé - Wellness Tea</option>
+                            <option value="wine">Wine Lounge</option>
+                            <option value="cigar">Cigar Lounge</option>
+                            <option value="jazz">Jazz Lounge</option>
+                            <option value="bottle-keep">The Bottle Keep</option>
+                            <option value="events">Weekly Events</option>
+                            <option value="all">All Experiences</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <span>Secure My Spot</span>
+                    </button>
+                </form>
+                <p class="modal-footer-text">By joining, you agree to receive exclusive updates about our reopening.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal modal-success">
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <div class="modal-content">
+                <div class="success-icon">
+                    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="32" cy="32" r="28" />
+                        <path d="M20 32l8 8 16-16" />
+                    </svg>
+                </div>
+                <h2>Welcome to the List</h2>
+                <p>You're now part of an exclusive circle. We'll be in touch soon with priority access details.</p>
+                <button class="btn btn-secondary" data-close-modal>Continue Exploring</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

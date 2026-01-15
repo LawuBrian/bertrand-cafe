@@ -60,14 +60,21 @@ function initExploreMenu() {
     const exploreMenu = document.getElementById('exploreMenu');
     const searchOverlay = document.getElementById('searchOverlay');
 
+    console.log('Explore menu init:', { exploreToggle, exploreMenu });
+
     if (!exploreToggle || !exploreMenu) return;
 
-    exploreToggle.addEventListener('click', () => {
+    exploreToggle.addEventListener('click', (e) => {
+        console.log('Explore button clicked!');
+        e.preventDefault();
+        e.stopPropagation();
+
         // Close search if open
         if (searchOverlay) searchOverlay.classList.remove('active');
 
         // Toggle explore menu
         exploreMenu.classList.toggle('active');
+        console.log('Menu active state:', exploreMenu.classList.contains('active'));
     });
 
     // Close when clicking outside

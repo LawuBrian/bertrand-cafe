@@ -361,6 +361,10 @@ section::after {
     cursor: pointer;
     padding: 0.5rem;
     transition: var(--transition-fast);
+    position: relative;
+    z-index: 1001;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .nav-explore:hover {
@@ -527,6 +531,7 @@ section::after {
     visibility: hidden;
     transform: translateY(-10px);
     transition: var(--transition-normal);
+    z-index: 1000;
 }
 
 .explore-menu::after {
@@ -599,6 +604,13 @@ section::after {
 
     .explore-column:last-child {
         border-bottom: none;
+    }
+
+    /* Larger touch target for mobile */
+    .nav-explore {
+        min-width: 44px;
+        min-height: 44px;
+        padding: 0.75rem;
     }
 }
 

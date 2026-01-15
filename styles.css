@@ -275,7 +275,7 @@ h6 {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 9999;
     padding: var(--space-sm) 0;
     transition: var(--transition-normal);
     background: transparent;
@@ -611,6 +611,68 @@ section::after {
         min-width: 44px;
         min-height: 44px;
         padding: 0.75rem;
+        position: relative;
+        z-index: 10001;
+    }
+
+    /* Ensure explore menu appears on top on mobile */
+    .explore-menu {
+        z-index: 10000;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    /* Mobile search overlay fixes */
+    .search-overlay {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        z-index: 10000;
+        padding: var(--space-md);
+    }
+
+    .search-container {
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+
+    .search-input {
+        font-size: 1.1rem;
+        padding: var(--space-sm);
+        width: 100%;
+    }
+
+    /* Mobile login modal - stretched */
+    .modal-overlay#loginModal .modal {
+        width: 95%;
+        max-width: 400px;
+        margin: var(--space-md);
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .modal-overlay#loginModal .modal-content {
+        padding: var(--space-md);
+    }
+
+    .auth-tabs {
+        margin-bottom: var(--space-sm);
+    }
+
+    .auth-tab {
+        padding: 0.6rem 0.75rem;
+        font-size: 0.8rem;
+    }
+
+    .form-row-inline {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
     }
 }
 

@@ -170,7 +170,7 @@ body::after {
 /* Desktop-specific Hero Spacing */
 @media (min-width: 1025px) {
     .hero-content {
-        padding-top: 240px;
+        padding-top: 200px;
         /* Adjusting for fixed navbar presence on larger screens */
     }
 }
@@ -582,6 +582,24 @@ section::after {
 
 .explore-column a:hover {
     color: var(--gold);
+}
+
+/* Mobile: Single column explore menu */
+@media (max-width: 768px) {
+    .explore-menu-inner {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+        padding: 0 var(--space-md);
+    }
+
+    .explore-column {
+        border-bottom: 1px solid rgba(29, 107, 82, 0.2);
+        padding-bottom: var(--space-md);
+    }
+
+    .explore-column:last-child {
+        border-bottom: none;
+    }
 }
 
 /* Search Overlay */

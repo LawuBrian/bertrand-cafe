@@ -167,6 +167,14 @@ body::after {
     }
 }
 
+/* Desktop-specific Hero Spacing */
+@media (min-width: 1025px) {
+    .hero-content {
+        padding-top: 240px;
+        /* Adjusting for fixed navbar presence on larger screens */
+    }
+}
+
 /* Reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
     .video-background video {

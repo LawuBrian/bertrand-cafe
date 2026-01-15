@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initSearchOverlay();
     initHeroSlider();
     initWaitlistModal();
+    initLoginModal();
     initScrollAnimations();
     initSmoothScroll();
     initDiagonalBanners();
@@ -17,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initEventCards();
     initSpecialsCarousel();
     initCart();
+    initEventsNavigation();
 });
 
 /**
@@ -64,8 +66,9 @@ function initExploreMenu() {
 
     if (!exploreToggle || !exploreMenu) return;
 
-    exploreToggle.addEventListener('click', (e) => {
-        console.log('Explore button clicked!');
+    // Toggle function
+    const toggleMenu = (e) => {
+        console.log('Explore button clicked/touched!');
         e.preventDefault();
         e.stopPropagation();
 
@@ -75,6 +78,13 @@ function initExploreMenu() {
         // Toggle explore menu
         exploreMenu.classList.toggle('active');
         console.log('Menu active state:', exploreMenu.classList.contains('active'));
+    };
+
+    // Add both click and touch events for better mobile support
+    exploreToggle.addEventListener('click', toggleMenu);
+    exploreToggle.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        toggleMenu(e);
     });
 
     // Close when clicking outside
@@ -857,3 +867,114 @@ console.log(
     '%c The Soul of Maboneng. Reimagined. ',
     'color: #a0a0a0; font-size: 12px; font-family: -apple-system, sans-serif;'
 );
+
+/**
+ * Login Modal - Toggle & Tab Switching
+ */
+function initLoginModal() {
+    const loginToggle = document.getElementById('loginToggle');
+    const loginModal = document.getElementById('loginModal');
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
+    const authTabs = document.querySelectorAll('.auth-tab');
+    const modalTitle = document.getElementById('loginModalTitle');
+
+    if (!loginToggle || !loginModal) return;
+
+    // Open login modal
+    loginToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal(loginModal);
+    });
+
+    // Close button
+    const closeBtn = loginModal.querySelector('.modal-close');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            loginModal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }
+
+    // Close on overlay click
+    loginModal.addEventListener('click', (e) => {
+        if (e.target === loginModal) {
+            loginModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+
+    // Tab switching
+    authTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const tabType = tab.dataset.tab;
+
+            // Update active tab
+            authTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            // Show correct form
+            if (tabType === 'login') {
+                loginForm.style.display = 'block';
+                signupForm.style.display = 'none';
+                modalTitle.textContent = 'Welcome Back';
+            } else {
+                loginForm.style.display = 'none';
+                signupForm.style.display = 'block';
+                modalTitle.textContent = 'Create Account';
+            }
+        });
+    });
+
+    // Login form submission
+    if (loginForm) {
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(loginForm);
+            console.log('Login attempt:', Object.fromEntries(formData));
+            alert('Login functionality coming soon!');
+        });
+    }
+
+    // Signup form submission
+    if (signupForm) {
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(signupForm);
+            console.log('Signup attempt:', Object.fromEntries(formData));
+            alert('Account created! (Demo)');
+            loginModal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }
+}
+
+/**
+ * Events Navigation - Auto-open cards when clicking Events link
+ */
+function initEventsNavigation() {
+    const eventsLinks = document.querySelectorAll('a[href="#events"]');
+    const eventsSection = document.querySelector('.events-banner-section');
+    const eventsCard = document.getElementById('eventsBanner');
+
+    eventsLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            // Close any open menus
+            document.getElementById('exploreMenu')?.classList.remove('active');
+
+            // Scroll to events section
+            if (eventsSection) {
+                eventsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                // After scrolling, auto-expand the events card
+                setTimeout(() => {
+                    if (eventsCard && !eventsSection.classList.contains('expanded')) {
+                        eventsCard.click();
+                    }
+                }, 800);
+            }
+        });
+    });
+}

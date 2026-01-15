@@ -5767,3 +5767,116 @@ html {
     box-shadow: 0 8px 25px rgba(201, 169, 98, 0.4);
     transform: translateY(-2px);
 }
+
+/* ============================================
+   LOGIN/SIGNUP MODAL TABS
+   ============================================ */
+.auth-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: var(--space-md);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(201, 169, 98, 0.3);
+}
+
+.auth-tab {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    background: transparent;
+    border: none;
+    color: var(--gray-light);
+    font-family: var(--font-accent);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.auth-tab:hover {
+    color: var(--cream);
+    background: rgba(201, 169, 98, 0.1);
+}
+
+.auth-tab.active {
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--charcoal);
+}
+
+.form-row-inline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-md);
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--gray-light);
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--gold);
+}
+
+.forgot-link {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--gold);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.forgot-link:hover {
+    color: var(--gold-light);
+}
+
+/* ============================================
+   FOOTER MAP & DIRECTIONS
+   ============================================ */
+.footer-map {
+    margin-top: var(--space-md);
+    margin-bottom: var(--space-sm);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(29, 107, 82, 0.3);
+}
+
+.footer-map iframe {
+    display: block;
+}
+
+.btn-directions {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: var(--space-sm);
+    padding: 0.75rem 1.25rem;
+    background: linear-gradient(135deg, var(--emerald), var(--emerald-dark));
+    color: var(--cream);
+    font-family: var(--font-accent);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.btn-directions:hover {
+    background: linear-gradient(135deg, var(--emerald-light), var(--emerald));
+    box-shadow: 0 4px 15px rgba(29, 107, 82, 0.4);
+    transform: translateY(-2px);
+}
+
+.btn-directions svg {
+    stroke: var(--cream);
+}

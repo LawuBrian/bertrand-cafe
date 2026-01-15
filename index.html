@@ -42,7 +42,7 @@
                     <span>Explore</span>
                 </button>
                 <nav class="nav-links">
-                    <a href="#" class="nav-link">Shop</a>
+                    <a href="menu.html" class="nav-link">Shop</a>
                     <a href="#events" class="nav-link">Events</a>
                     <a href="about.html" class="nav-link">About Us</a>
                 </nav>
@@ -62,7 +62,7 @@
                         <path d="M21 21l-4.35-4.35" />
                     </svg>
                 </button>
-                <button class="nav-icon" aria-label="Account" data-open-waitlist>
+                <button class="nav-icon" aria-label="Account" id="loginToggle">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                         <circle cx="12" cy="7" r="4" />
@@ -798,23 +798,6 @@
         <span class="diamond">◆</span>
     </div>
 
-    <!-- Final CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Be Among the First</h2>
-                <p>Join our exclusive waitlist for priority access to our reimagined experience. Limited spots.
-                    Unlimited memories.</p>
-                <button class="btn btn-primary btn-large" data-open-waitlist>
-                    <span>Reserve Your Place</span>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -838,10 +821,11 @@
                 <div class="footer-links">
                     <h4>Connect</h4>
                     <ul>
-                        <li><a href="#">Instagram</a></li>
-                        <li><a href="#">Facebook</a></li>
-                        <li><a href="#">WhatsApp</a></li>
-                        <li><a href="#">TikTok</a></li>
+                        <li><a href="https://instagram.com/bertrandcafe" target="_blank" rel="noopener">Instagram</a>
+                        </li>
+                        <li><a href="https://facebook.com/bertrandcafe" target="_blank" rel="noopener">Facebook</a></li>
+                        <li><a href="https://wa.me/27123456789" target="_blank" rel="noopener">WhatsApp</a></li>
+                        <li><a href="https://tiktok.com/@bertrandcafe" target="_blank" rel="noopener">TikTok</a></li>
                     </ul>
                 </div>
                 <div class="footer-contact">
@@ -851,6 +835,22 @@
                         Maboneng, Johannesburg<br>
                         South Africa
                     </address>
+                    <div class="footer-map">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3580.5!2d28.0589!3d-26.2041!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s296%20Fox%20Street%2C%20Maboneng%2C%20Johannesburg!5e0!3m2!1sen!2sza!4v1234567890"
+                            width="100%" height="200" style="border:0; border-radius: 8px;" allowfullscreen=""
+                            loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <a href="https://maps.google.com/?q=296+Fox+Street,+Maboneng,+Johannesburg" target="_blank"
+                        class="btn-directions">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        Get Directions
+                    </a>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -950,6 +950,78 @@
                 <h2>Welcome to the List</h2>
                 <p>You're now part of an exclusive circle. We'll be in touch soon with priority access details.</p>
                 <button class="btn btn-secondary" data-close-modal>Continue Exploring</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login/Signup Modal -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal">
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="modal-icon">👤</span>
+                    <h2 id="loginModalTitle">Welcome Back</h2>
+                </div>
+
+                <!-- Login/Signup Tabs -->
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="login">Login</button>
+                    <button class="auth-tab" data-tab="signup">Sign Up</button>
+                </div>
+
+                <!-- Login Form -->
+                <form class="auth-form" id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email Address</label>
+                        <input type="email" id="loginEmail" name="email" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" name="password" required
+                            placeholder="Enter your password">
+                    </div>
+                    <div class="form-row-inline">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="remember"> Remember me
+                        </label>
+                        <a href="#" class="forgot-link">Forgot password?</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <span>Sign In</span>
+                    </button>
+                </form>
+
+                <!-- Signup Form (hidden by default) -->
+                <form class="auth-form" id="signupForm" style="display: none;">
+                    <div class="form-group">
+                        <label for="signupName">Full Name</label>
+                        <input type="text" id="signupName" name="name" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="signupEmail">Email Address</label>
+                        <input type="email" id="signupEmail" name="email" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPhone">Phone Number</label>
+                        <input type="tel" id="signupPhone" name="phone" placeholder="Enter your phone number">
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" name="password" required
+                            placeholder="Create a password">
+                    </div>
+                    <div class="form-group">
+                        <label for="signupConfirm">Confirm Password</label>
+                        <input type="password" id="signupConfirm" name="confirm" required
+                            placeholder="Confirm your password">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <span>Create Account</span>
+                    </button>
+                </form>
+
+                <p class="modal-footer-text">By continuing, you agree to our Terms of Service and Privacy Policy.</p>
             </div>
         </div>
     </div>
